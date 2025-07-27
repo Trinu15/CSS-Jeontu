@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Curved Edge Star Coin</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .coin {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #e0a84f, #aa682a);
+      box-shadow:
+        inset -6px -6px 12px rgba(0, 0, 0, 0.3),
+        inset 6px 6px 12px rgba(255, 255, 255, 0.05),
+        2px 2px 8px rgba(0,0,0,0.4);
+      transition: box-shadow 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      width: 180px;
+      height: 180px;
+      transform: translateY(-30px);
+    }
+
+    .star-outline {
+      fill: none;
+      stroke: #5a3416;
+      stroke-width: 6;
+      stroke-linejoin: round; /* ← curves the star edges */
+      stroke-linecap: round;
+    }
+
+    .stick {
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      width: 10px;
+      height: 110px;
+      background: #5a3416;
+      transform: translateX(-50%);
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="coin">
+    <svg viewBox="0 0 100 100">
+      <polygon
+        class="star-outline"
+        points="50,10 61,39 92,39 66,58 75,88 50,70 25,88 34,58 8,39 39,39"
+      />
+    </svg>
+    <div class="stick"></div>
+  </div>
+
+  <script>
+    const coin = document.querySelector('.coin');
+    const defaultShadow = `
+      inset -6px -6px 12px rgba(0, 0, 0, 0.3),
+      inset 6px 6px 12px rgba(255, 255, 255, 0.05),
+      2px 2px 8px rgba(0,0,0,0.4)
+    `;
+
+    coin.addEventListener('mouseenter', () => {
+      coin.style.boxShadow = defaultShadow + ', 0 0 20px #ffcc00';
+    });
+
+    coin.addEventListener('mouseleave', () => {
+      coin.style.boxShadow = defaultShadow;
+    });
+  </script>
+</body>
+</html>
